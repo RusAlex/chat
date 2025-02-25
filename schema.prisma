@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://tadej:hiti@localhost:5432/hiti"
+}
+
+model messages {
+  id      Int     @id @default(autoincrement())
+  content String?
+  user_id Int?
+  likes   likes[]
+  users   users?  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model users {
+  id       Int        @id @default(autoincrement())
+  name     String     @db.VarChar(255)
+  online   Int?       @default(0)
+  likes    likes[]
+  messages messages[]
+}
+
+model likes {
+  id         Int       @id @default(autoincrement())
+  user_id    Int?
+  message_id Int?
+  messages   messages? @relation(fields: [message_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_message")
+  users      users?    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user")
+
+  @@unique([user_id, message_id])
+}
