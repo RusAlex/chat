@@ -2,3 +2,13 @@ h1 {
     color: hotpink;
     font-family: cursive;
   }
+
+.two-columns-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+/* columns */
+.two-columns-grid > * {
+    padding:1rem;
+}

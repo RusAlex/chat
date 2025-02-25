@@ -110,7 +110,7 @@ const Chat = () => {
     if (!userName) return (<div><label>Username:<input id="username" type="text" name="username" onChange={handleUsernameChange} /></label><button onClick={setUsernameClick} >Start</button></div>);
 
     return (
-	<div>
+	<div class="two-columns-grid" >
 	    <div>
 	    {messages.map((message, index) =>
 		<p key={index}>{message.username} wrote: {message.content} <button data-id={message.id} onClick={handleLike}>{message.likes} Like</button></p>)}
